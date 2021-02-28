@@ -17,6 +17,10 @@ fseek(fp,0,SEEK_SET);
 	for(i=0;i<10;i++)
 	{
 		fread(&empl[i],sizeof(empl[i]),1,fp);
+		if(empl[i].empid==0)
+		{
+			break;
+		}
 		printf("%d\t",empl[i].empid);
 		printf("%s\t",empl[i].empname);
 		printf("%s\n",empl[i].cmpny);

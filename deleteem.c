@@ -5,36 +5,38 @@ struct emp{
 int empid;
 char empname[10];
 char cmpny[10];
-struct emp *link;
 };
 typedef struct emp ll;
-ll *First=NULL,*temp;
-int i,flag=0,k=0;
+ll empl[10];
+int i,flag=0,k=0,search,size=10;
 main()
 {
-FILE *fp;
+FILE *fp,*fp1;
 fp=fopen("employeedb","rb");
-temp=(ll*)malloc(sizeof(ll));
-
-printf("enter the emp id to deleted\n");
+fp1=fopen("employeedb1","w+b");
+printf("enter the emp id to be deleted\n");
 scanf("%d",&search);
-	while(k<10)
+fseek(fp,0,SEEK_SET);
+	for(i=0;i<size;i++)
 	{
-		fseek(fp,sizeof(struct emp)*k,SEEK_SET);
-		while(temp->link!=NULL)
-		{
-			fread(&em[k],sizeof(em[k]),1,fp);
-			if((em[k].empid)==search)
-			{
-			
-			}
-		  { 
-			fseek(fp,sizeof(em[i]),SEEK_SET);
-			
-		
-		
-	}
-	
-fclose(fp);
+			fread(&empl[i],sizeof(empl[i]),1,fp);
+			if(search==(empl[i].empid))
+			  {	flag=1;
 
+				printf("deleted details of emp id %d with name %s\n",empl[i].empid,empl[i].empname);
+                                i++;
+				fread(&empl[i],sizeof(empl[i]),1,fp);			 	
+				size--;
+		          }
+		
+	                fwrite(&empl[i],sizeof(empl[i]),1,fp1);
+
+			   
+	}
+	if(flag==0)
+	{printf("entered id is not found\n");}
+fclose(fp);
+remove("employeedb");
+rename("employeedb1","employeedb");
 }
+
