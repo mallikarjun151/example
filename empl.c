@@ -7,12 +7,12 @@ struct emp{
     char cmpny[10];
 };
 typedef struct emp ll;
-ll emp[10];
+ll emp[5];
 int i;
 main()
 {   FILE *fp;
     fp=fopen("employeedb","wb");
-    for(i=0;i<10;i++)
+    for(i=0;i<5;i++)
     {   printf("enter the empid\n");
         scanf("%d",&(emp[i].empid));
         printf("enter the empname\n");
